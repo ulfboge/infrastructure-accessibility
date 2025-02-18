@@ -1,0 +1,43 @@
+// Group places into logical categories and assign appropriate sizes
+var placeType = $feature.place;
+
+// Determine size based on place category
+var size = When(
+    // Major Urban Centers - Largest
+    placeType == 'city', 16,
+    
+    // Medium Urban Areas - Large
+    placeType == 'town' || 
+    placeType == 'municipality', 14,
+    
+    // Suburban Areas - Medium-Large
+    placeType == 'suburb' || 
+    placeType == 'quarter' || 
+    placeType == 'neighbourhood' || 
+    placeType == 'borough', 12,
+    
+    // Rural Settlements - Medium
+    placeType == 'village', 10,
+    
+    // Small Rural Places - Small
+    placeType == 'hamlet' || 
+    placeType == 'isolated_dwelling' || 
+    placeType == 'farm', 8,
+    
+    // Other Named Places - Smallest
+    placeType == 'locality', 6,
+    
+    6 // Default size for uncategorized places
+);
+
+// Add a subtle halo effect for vintage look
+var symbol = {
+    "type": "simple-marker",  // Specifies a simple marker symbol
+    "style": "circle",        // Sets the shape to circle
+    "size": size,
+    "color": "#4A4238",      // Dark brown for vintage look
+    "haloSize": size * 0.3,
+    "haloColor": "#F5F4F1"   // Light beige for vintage effect
+};
+
+return symbol; 

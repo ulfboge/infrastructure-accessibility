@@ -1,0 +1,7 @@
+[general]
+name=NDVI Biomass Estimator
+description=Calculates NDVI and estimates biomass from satellite imagery
+version=1.0
+qgisMinimumVersion=3.0
+author=Johan Karlsson
+email=johan@kombagis.se
