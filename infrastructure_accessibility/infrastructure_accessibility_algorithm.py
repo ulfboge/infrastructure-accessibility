@@ -10,6 +10,7 @@
 """
 
 from qgis.PyQt.QtCore import QCoreApplication, QVariant
+from qgis.PyQt.QtGui import QColor
 from qgis.core import (
     QgsProcessing,
     QgsProcessingAlgorithm,
@@ -22,7 +23,8 @@ from qgis.core import (
     QgsGraduatedSymbolRenderer,
     QgsGradientColorRamp,
     QgsProcessingUtils,
-    QgsProcessingException
+    QgsProcessingException,
+    QgsProcessingProvider
 )
 import processing
 
@@ -37,8 +39,8 @@ class InfrastructureAccessibilityAlgorithm(QgsProcessingAlgorithm):
     INPUT_COOPERATIVES = 'INPUT_COOPERATIVES'
     INPUT_ROADS = 'INPUT_ROADS'
     INPUT_MARKETS = 'INPUT_MARKETS'
-    ROAD_BUFFER_DISTANCES = 'ROAD_BUFFER_DISTANCES'
-    MARKET_BUFFER_DISTANCES = 'MARKET_BUFFER_DISTANCES'
+    ROAD_BUFFER_DISTANCE = 'ROAD_BUFFER_DISTANCE'
+    MARKET_BUFFER_DISTANCE = 'MARKET_BUFFER_DISTANCE'
     ROAD_WEIGHT = 'ROAD_WEIGHT'
     OUTPUT = 'OUTPUT'
 
@@ -124,23 +126,21 @@ class InfrastructureAccessibilityAlgorithm(QgsProcessingAlgorithm):
         # Add numeric parameters
         self.addParameter(
             QgsProcessingParameterNumber(
-                self.ROAD_BUFFER_DISTANCES,
-                self.tr('Road Buffer Distances (comma-separated meters)'),
+                self.ROAD_BUFFER_DISTANCE,
+                self.tr('Road Buffer Distance (meters)'),
                 QgsProcessingParameterNumber.Integer,
                 defaultValue=1000,
-                optional=False,
-                minValue=1
+                minValue=0
             )
         )
 
         self.addParameter(
             QgsProcessingParameterNumber(
-                self.MARKET_BUFFER_DISTANCES,
-                self.tr('Market Buffer Distances (comma-separated meters)'),
+                self.MARKET_BUFFER_DISTANCE,
+                self.tr('Market Buffer Distance (meters)'),
                 QgsProcessingParameterNumber.Integer,
                 defaultValue=2000,
-                optional=False,
-                minValue=1
+                minValue=0
             )
         )
 
@@ -150,17 +150,16 @@ class InfrastructureAccessibilityAlgorithm(QgsProcessingAlgorithm):
                 self.tr('Road Accessibility Weight (0-1)'),
                 QgsProcessingParameterNumber.Double,
                 defaultValue=0.6,
-                optional=False,
                 minValue=0,
                 maxValue=1
             )
         )
 
-        # Add the output
+        # Add output parameter
         self.addParameter(
             QgsProcessingParameterFeatureSink(
                 self.OUTPUT,
-                self.tr('Accessibility Results')
+                self.tr('Output Layer')
             )
         )
 
@@ -168,12 +167,12 @@ class InfrastructureAccessibilityAlgorithm(QgsProcessingAlgorithm):
         """
         Process the algorithm.
         """
-        # Get parameters
+        # Get input parameters
         cooperatives = self.parameterAsVectorLayer(parameters, self.INPUT_COOPERATIVES, context)
         roads = self.parameterAsVectorLayer(parameters, self.INPUT_ROADS, context)
         markets = self.parameterAsVectorLayer(parameters, self.INPUT_MARKETS, context)
-        road_distance = self.parameterAsInt(parameters, self.ROAD_BUFFER_DISTANCES, context)
-        market_distance = self.parameterAsInt(parameters, self.MARKET_BUFFER_DISTANCES, context)
+        road_distance = self.parameterAsInt(parameters, self.ROAD_BUFFER_DISTANCE, context)
+        market_distance = self.parameterAsInt(parameters, self.MARKET_BUFFER_DISTANCE, context)
         road_weight = self.parameterAsDouble(parameters, self.ROAD_WEIGHT, context)
         market_weight = 1 - road_weight
 
@@ -304,4 +303,14 @@ class InfrastructureAccessibilityProvider(QgsProcessingProvider):
         return QgsProcessingProvider.icon(self)
 
     def longName(self):
-        return self.name() 
+        return self.name()
+
+    def initGui(self):
+        """Initialize the GUI elements"""
+        # For Processing providers, we don't need to do anything here
+        pass
+
+    def unload(self):
+        """Unload the provider"""
+        # For Processing providers, we don't need to do anything here
+        pass 
