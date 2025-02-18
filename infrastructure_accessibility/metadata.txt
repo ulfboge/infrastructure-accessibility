@@ -1,1 +1,20 @@
- 
+[general]
+name=Infrastructure Accessibility
+qgisMinimumVersion=3.0
+description=Analyzes infrastructure accessibility for cooperatives
+version=0.1
+author=Johan Karlsson
+email=johan@kombagis.se
+
+about=This plugin analyzes the accessibility of infrastructure for cooperatives by calculating proximity scores to roads and markets.
+
+tracker=https://github.com/ulfboge/infrastructure-accessibility/issues
+repository=https://github.com/ulfboge/infrastructure-accessibility
+
+tags=analysis,infrastructure,accessibility,processing
+
+homepage=https://github.com/ulfboge/infrastructure-accessibility
+category=Analysis
+icon=icon.png
+experimental=True
+hasProcessingProvider=yes 
