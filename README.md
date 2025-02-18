@@ -1,42 +1,45 @@
-# Infrastructure & Accessibility Map QGIS Plugin
+# Infrastructure Accessibility QGIS Plugin
 
-A QGIS plugin that visualizes infrastructure accessibility for cooperatives, showing their proximity to roads, markets, and other key infrastructure.
+A QGIS Processing plugin that analyzes infrastructure accessibility for cooperatives by calculating proximity scores to roads and markets.
 
 ## Features
 
-- Visualizes road networks and market locations
-- Creates distance buffers from cooperatives to nearest major roads/markets
-- Uses symbol sizes to indicate accessibility levels
-- Generates accessibility scores based on proximity to infrastructure
+- Calculates accessibility scores based on proximity to:
+  - Roads (line features)
+  - Markets (point features)
+- Configurable buffer distances for both roads and markets
+- Adjustable weighting between road and market accessibility
+- Outputs a styled layer with graduated colors showing accessibility scores
 
 ## Installation
 
-1. Download the ZIP file from the latest release
-2. Open QGIS
-3. Go to Plugins → Manage and Install Plugins
-4. Choose "Install from ZIP" and select the downloaded file
-5. Enable the plugin in the Plugins menu
-
-## Required Data
-
-The plugin expects the following input layers:
-- Cooperatives (point layer)
-- Roads (line layer)
-- Markets (point layer)
+1. Open QGIS
+2. Go to Plugins → Manage and Install Plugins
+3. Select "Install from ZIP" tab
+4. Browse to the downloaded plugin ZIP file
+5. Click "Install Plugin"
 
 ## Usage
 
-1. Ensure all required layers are loaded in your QGIS project
-2. Go to Plugins → Infrastructure Accessibility → Generate Accessibility Map
-3. Select your input layers in the dialog
-4. Click "Run" to generate the visualization
+1. Open QGIS Processing Toolbox
+2. Find "Infrastructure Accessibility Analysis" under "Infrastructure Analysis"
+3. Set the following parameters:
+   - Cooperatives Layer (point features)
+   - Roads Layer (line features)
+   - Markets Layer (point features)
+   - Buffer distances for roads and markets
+   - Weight for road accessibility (0-1)
+4. Run the analysis
 
-## Contributing
+The output layer will show cooperatives colored from red (poor accessibility) to green (good accessibility).
 
-1. Fork the repository
-2. Create a new branch for your feature
-3. Submit a pull request
+## Requirements
 
-## License
+- QGIS 3.0 or later
+- Processing Framework enabled
 
-This project is licensed under the MIT License - see the LICENSE file for details. 
+## Development
+
+To contribute to this plugin:
+
+1. Clone the repository:
