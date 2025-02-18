@@ -1,1 +1,23 @@
- 
+# Make sure you're in the correct directory
+cd infrastructure-accessibility
+
+# Initialize git repository (if you haven't already)
+git init
+
+# Add all files
+git add .
+
+# Create initial commit
+git commit -m "Initial commit: Infrastructure Accessibility QGIS plugin"
+
+# Rename the default branch to 'main' if it's not already
+git branch -M main
+
+# Add the remote (replace 'yourusername' with your actual GitHub username)
+git remote add origin https://github.com/ulfboge/infrastructure-accessibility.git
+
+# Pull first to sync any remote changes (with --allow-unrelated-histories flag)
+git pull origin main --allow-unrelated-histories
+
+# Now push to GitHub
+git push -u origin main 
