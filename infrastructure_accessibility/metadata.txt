@@ -1,0 +1,19 @@
+[general]
+name=Infrastructure Accessibility Map
+qgisMinimumVersion=3.0
+description=Visualizes infrastructure accessibility for cooperatives
+version=0.1
+author=Your Name
+email=your.email@example.com
+
+about=This plugin creates accessibility maps showing the proximity of cooperatives to key infrastructure like roads and markets.
+
+tracker=https://github.com/yourusername/infrastructure-accessibility/issues
+repository=https://github.com/yourusername/infrastructure-accessibility
+
+tags=analysis,infrastructure,accessibility
+
+homepage=https://github.com/yourusername/infrastructure-accessibility
+category=Analysis
+icon=icon.png
+experimental=True 

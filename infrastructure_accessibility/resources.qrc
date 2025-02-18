@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/plugins/infrastructure_accessibility">
+        <file>icon.png</file>
+    </qresource>
+</RCC> 
